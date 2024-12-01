@@ -1,10 +1,10 @@
+import { selectPosts } from '@/store/slices/postSlice';
 import Head from 'next/head';
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { wrapper } from '../store';
 import { increment, selectCounterData } from '../store/slices/counterSlice';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectPosts } from '@/store/slices/postSlice';
 // import { useCounter } from '../contexts/CounterContext';
 
 // Define the type for Giphy data
@@ -93,8 +93,8 @@ export default function Home({ catGiphys }: InitialDataProps) {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
-  console.log('Home Page State:', store.getState());
+export const getServerSideProps = wrapper.getServerSideProps(() => async () => {
+  // console.log('Home Page State:', store.getState());
 
   const response = await fetch(
     'https://api.giphy.com/v1/gifs/search?q=cats&api_key=SXQwI6VJSOXXhcz6niY54Cv7OVByfaIN&limit=10',

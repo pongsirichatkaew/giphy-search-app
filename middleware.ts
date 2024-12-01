@@ -1,12 +1,12 @@
-// middleware.js
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const config = {
   matcher: ['/', '/profile'],
 };
 
-export function middleware(req) {
-  // Redirect to /login if the user is not authenticated
+// Middleware function with proper typing
+export function middleware(req: NextRequest): NextResponse {
+  // Uncomment the below lines if you want to add authentication logic
   // const isAuthenticated = req.cookies.get('authToken');
   // console.log('isAuthenticated', isAuthenticated);
   // if (!isAuthenticated) {

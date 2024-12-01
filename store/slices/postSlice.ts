@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define the state type for the posts slice
-type Post = {
+export type Post = {
   id: number;
   title: string;
   body: string;

@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { HYDRATE } from 'next-redux-wrapper';
+import { createSlice } from '@reduxjs/toolkit';
 
 // Define the state type for the counter slice
 type CounterState = {
