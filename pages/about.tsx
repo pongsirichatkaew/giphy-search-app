@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import Link from 'next/link';
 
 export default function About() {
   return (
@@ -9,6 +10,7 @@ export default function About() {
           <title>About</title>
         </Head>
         <h1>About</h1>
+        <Link href='/'>Home</Link>
         <p>
           Love giphys? So do we. use our app <b>giphy search</b> to find the perfect giphy for any occasion.
         </p>
