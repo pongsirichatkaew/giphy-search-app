@@ -23,18 +23,16 @@ const counterSlice = createSlice({
       state.value -= 1;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(HYDRATE, (state, action: any) => {
-      console.log('current', state);
-      console.log('action', action, action.payload);
-      const nextState = {
-        ...state,
-        ...action.payload.counter,
-      };
-      if (state.value) nextState.value = state.value;
-      return nextState;
-    });
-  },
+//   extraReducers: (builder) => {
+//     builder.addCase(HYDRATE, (state, action: any) => {
+//       const nextState = {
+//         ...state,
+//         ...action.payload.counter,
+//       };
+//       if (state.value) nextState.value = state.value;
+//       return nextState;
+//     });
+//   },
 });
 
 // Export actions

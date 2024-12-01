@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { wrapper } from '../store';
 import { increment, selectCounterData } from '../store/slices/counterSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectPosts } from '@/store/slices/postSlice';
 // import { useCounter } from '../contexts/CounterContext';
 
 // Define the type for Giphy data
@@ -30,7 +31,8 @@ export default function Home({ catGiphys }: InitialDataProps) {
   const [searchResults, setSearchResults] = useState<GiphyData[]>([]);
   const counter = useSelector(selectCounterData);
   const dispatch = useDispatch();
-
+  const posts = useSelector(selectPosts);
+  // console.log('posts', posts);
   // const { counter, increment, decrement } = useCounter();
 
   useEffect(() => {
@@ -38,8 +40,8 @@ export default function Home({ catGiphys }: InitialDataProps) {
   }, []);
 
   useEffect(() => {
-    console.log('Home', counter);
-  }, [counter]);
+    console.log('Home', counter, posts);
+  }, [counter, posts]);
 
   useEffect(() => {
     setSearchResults(catGiphys.data);
@@ -68,6 +70,9 @@ export default function Home({ catGiphys }: InitialDataProps) {
 
       <h1>Giphy Search App</h1>
       <Link href='/about'>About</Link>
+      <Link className='ml-3' href='/posts'>
+        Posts
+      </Link>
 
       <form onSubmit={search}>
         <input name='searchTerm' onChange={handleInputs} type='text' required />

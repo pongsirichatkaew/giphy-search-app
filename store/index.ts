@@ -1,6 +1,7 @@
 import { combineReducers, configureStore, createSelector, Store, AnyAction, Reducer } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE, MakeStore } from 'next-redux-wrapper';
 import counterReducer from './slices/counterSlice';
+import postsReducer, { PostsState } from './slices/postSlice';
 
 // Define the state type for the counter slice
 type CounterState = {
@@ -10,24 +11,29 @@ type CounterState = {
 // Define the root state type
 type RootState = {
   counter: CounterState;
+  posts: PostsState;
 };
 
 // Combine reducers
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
   counter: counterReducer,
+  posts: postsReducer,
 });
 
-// Reducer handling the HYDRATE action
-const reducer: Reducer<RootState, AnyAction> = (state, action) => {
-  //   if (action.type === HYDRATE) {
-  //     const nextState: RootState = {
-  //       ...state, // use previous state
-  //       ...action.payload, // apply delta from hydration
-  //     };
-  //     if (state?.counter?.value) nextState.counter.value = state.counter.value;
-  //     return nextState;
-  //   }
-  return rootReducer(state, action);
+// Handle HYDRATE at the root level
+const reducer = (state: any, action: any) => {
+  if (action.type === HYDRATE) {
+    const nextState = {
+      ...state, // use previous state
+      ...action.payload, // apply delta from hydration
+    };
+
+    if (state.counter) nextState.counter = state.counter;
+    if (state.posts) nextState.posts = state.posts;
+
+    return nextState;
+  }
+  return combinedReducer(state, action);
 };
 
 // Configure store
