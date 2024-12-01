@@ -1,16 +1,24 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useSelector, useStore, useDispatch } from 'react-redux';
 import { wrapper } from '../store';
-import { selectCounterData } from '../store/slices/counterSlice';
+import { increment, selectCounterData } from '../store/slices/counterSlice';
 import { useCounter } from '../contexts/CounterContext';
 
 export default function About() {
   const counter = useSelector(selectCounterData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(increment());
+  }, []);
+
+  useEffect(() => {
+    console.log('About', counter);
+  }, [counter]);
   // const { counter, increment, decrement } = useCounter();
 
-  console.log('About', counter);
   return (
     <>
       <div className='container'>
@@ -48,5 +56,6 @@ export default function About() {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
   console.log('About Page State:', store.getState());
+
   return { props: {} };
 });
