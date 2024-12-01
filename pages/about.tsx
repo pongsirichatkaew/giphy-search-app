@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { useSelector, useStore, useDispatch } from 'react-redux';
 import { wrapper } from '../store';
 import { selectCounterData } from '../store/slices/counterSlice';
+import { useCounter } from '../contexts/CounterContext';
 
 export default function About() {
   const counter = useSelector(selectCounterData);
+  // const { counter, increment, decrement } = useCounter();
 
   console.log('About', counter);
   return (

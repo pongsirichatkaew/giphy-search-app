@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
-import { AppState, wrapper } from '../store';
+import { wrapper } from '../store';
 import { increment, selectCounterData } from '../store/slices/counterSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { useCounter } from '../contexts/CounterContext';
 
 // Define the type for Giphy data
 type GiphyData = {
@@ -27,8 +28,12 @@ export default function Home({ catGiphys }: InitialDataProps) {
     searchTerm: 'cat',
   });
   const [searchResults, setSearchResults] = useState<GiphyData[]>([]);
-  const counter = useSelector(selectCounterData);
+  // const counter = useSelector(selectCounterData);
+  const { counter, increment, decrement } = useCounter();
 
+  useEffect(() => {
+    increment();
+  }, []);
   useEffect(() => {
     console.log('Home', counter);
   }, [counter]);
@@ -81,8 +86,10 @@ export default function Home({ catGiphys }: InitialDataProps) {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
-  store.dispatch(increment());
-  console.log('Home Page State:', store.getState());
+  // console.log('Home Page State:', store.getState());
+  // store.dispatch(increment());
+  // const { increment } = useCounter();
+  // increment();
 
   const response = await fetch(
     'https://api.giphy.com/v1/gifs/search?q=cats&api_key=SXQwI6VJSOXXhcz6niY54Cv7OVByfaIN&limit=10',
