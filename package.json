@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
+    "jsondiffpatch": "^0.6.0",
     "next": "15.0.3",
     "next-redux-wrapper": "^8.1.0",
     "react": "^18.3.1",

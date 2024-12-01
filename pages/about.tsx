@@ -1,8 +1,14 @@
 import Head from 'next/head';
 import React from 'react';
 import Link from 'next/link';
+import { useSelector, useStore, useDispatch } from 'react-redux';
+import { wrapper } from '../store';
+import { selectCounterData } from '../store/slices/counterSlice';
 
 export default function About() {
+  const counter = useSelector(selectCounterData);
+
+  console.log('About', counter);
   return (
     <>
       <div className='container'>
@@ -37,3 +43,8 @@ export default function About() {
     </>
   );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
+  console.log('About Page State:', store.getState());
+  return { props: {} };
+});

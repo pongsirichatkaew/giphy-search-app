@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
+import { AppState, wrapper } from '../store';
+import { increment, selectCounterData } from '../store/slices/counterSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Define the type for Giphy data
 type GiphyData = {
@@ -21,9 +24,14 @@ type InitialDataProps = {
 export default function Home({ catGiphys }: InitialDataProps) {
   const [searchTerm, setSearchTerm] = useState<string>('cats');
   const [formInputs, setFormInputs] = useState<{ searchTerm: string }>({
-    searchTerm: '',
+    searchTerm: 'cat',
   });
   const [searchResults, setSearchResults] = useState<GiphyData[]>([]);
+  const counter = useSelector(selectCounterData);
+
+  useEffect(() => {
+    console.log('Home', counter);
+  }, [counter]);
 
   useEffect(() => {
     setSearchResults(catGiphys.data);
@@ -72,12 +80,13 @@ export default function Home({ catGiphys }: InitialDataProps) {
   );
 }
 
-export async function getServerSideProps() {
-  console.log('getStaticProps called...');
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
+  store.dispatch(increment());
+  console.log('Home Page State:', store.getState());
+
   const response = await fetch(
     'https://api.giphy.com/v1/gifs/search?q=cats&api_key=SXQwI6VJSOXXhcz6niY54Cv7OVByfaIN&limit=10',
   );
   const catGiphys = await response.json();
-  console.log('fetchCalled');
   return { props: { catGiphys } };
-}
+});
