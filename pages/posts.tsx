@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import { AppDispatch, AppStore, wrapper } from '@/store';
 import { fetchPosts, Post, selectPostsError, selectPostsLoading } from '@/store/slices/postSlice';
 import Link from 'next/link';
@@ -17,7 +18,6 @@ export default function PostsPage({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      <Link href='/'>Home</Link>
       <h1>Posts</h1>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
@@ -28,6 +28,7 @@ export default function PostsPage({ posts }: { posts: Post[] }) {
           <p>{post.body}</p>
         </React.Fragment>
       ))}
+      <Footer />
     </>
   );
 }

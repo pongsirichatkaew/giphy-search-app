@@ -54,7 +54,7 @@ input:focus{
 
 .footer{
   display: grid;
-  grid-template-columns: 1fr 1fr 4fr;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color: #EFEFEF;
   margin-top: 40px;
 }
