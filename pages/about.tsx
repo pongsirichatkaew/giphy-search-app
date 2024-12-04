@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -48,6 +49,8 @@ export default function About() {
           Images are stronger than words. However, the fast-moving nature of GIFs make them stronger than images and
           their shorter length make them more digestible than video. That's the short answer.
         </p>
+
+        <Footer />
       </div>
     </>
   );
