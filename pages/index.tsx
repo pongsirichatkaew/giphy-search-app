@@ -102,8 +102,9 @@ export default function Home({ giphys }: InitialDataProps) {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(() => async () => {
+  const API_KEY = process.env.NEXT_PUBLIC_GIPHY_API_KEY;
   const response = await fetch(
-    'https://api.giphy.com/v1/gifs/search?q=cats&api_key=SXQwI6VJSOXXhcz6niY54Cv7OVByfaIN&limit=10',
+    `https://api.giphy.com/v1/gifs/search?q=cats&api_key=${API_KEY}&limit=10`,
   );
   const giphys = await response.json();
   return { props: { giphys } };

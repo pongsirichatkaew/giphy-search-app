@@ -34,8 +34,10 @@ export default function Search(initialData: InitialDataProps) {
 
 export async function getServerSideProps(context: searchGetServerSideProps) {
   const searchTerm = context.query.searchTerm;
+  const API_KEY = process.env.NEXT_PUBLIC_GIPHY_API_KEY;
+
   let giphys = await fetch(
-    `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=SXQwI6VJSOXXhcz6niY54Cv7OVByfaIN&limit=6`,
+    `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=${API_KEY}&limit=6`,
   );
   const giphyJson = await giphys.json();
   return { props: { giphys: giphyJson } };
