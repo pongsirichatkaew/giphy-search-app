@@ -1,8 +1,8 @@
-import type { NextConfig } from "next";
+const { Config } = require('next-recompose-plugins');
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  reactStrictMode: false,
-};
-
-export default nextConfig;
+module.exports = new Config((phase, args) => {
+  return {
+    reactStrictMode: true,
+    experimental: {},
+  };
+}).build();

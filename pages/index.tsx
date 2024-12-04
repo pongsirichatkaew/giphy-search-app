@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer';
 import { selectPosts } from '@/store/slices/postSlice';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -64,7 +65,10 @@ export default function Home({ giphys }: InitialDataProps) {
   return (
     <div className='container'>
       <Head>
-        <title>Giphy App</title>
+        <title>Giphy Search App</title>
+        <meta
+          name='description'
+          content='Love giphys? We do too. Use our advanced giphy search to find the perfect giphy for any occation'></meta>
       </Head>
 
       <h1>Giphy Search App</h1>

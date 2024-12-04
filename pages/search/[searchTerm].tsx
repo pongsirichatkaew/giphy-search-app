@@ -13,7 +13,8 @@ export default function Search(initialData: InitialDataProps) {
   return (
     <>
       <Head>
-        <title>Search</title>
+        <title>Search results for: {router.query.searchTerm}</title>
+        <meta name='description' content={initialData.giphys.data.map((each, index) => each.title + ' ')}></meta>
       </Head>
       <h1>Search results for: {router.query.searchTerm}</h1>
 
